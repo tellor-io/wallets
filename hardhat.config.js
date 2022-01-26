@@ -63,7 +63,7 @@ module.exports = {
       seeds: [process.env.TESTNET_PK],
       gas: 10000000,
       gasPrice: 40000000000
- }//,
+ },
       // mainnet: {
       //   url: `${process.env.NODE_URL_MAINNET}`,
       //   accounts: [process.env.PRIVATE_KEY],
@@ -94,12 +94,18 @@ module.exports = {
       //   gas: 10000000 ,
       //   gasPrice: 50000000000
       // }
-      // polygon_testnet: {
-      //   url: `${process.env.NODE_URL_MUMBAI}`,
-      //   accounts: [process.env.TESTNET_PK],
-      //   gas: 10000000 ,
-      //   gasPrice: 50000000000
-      // }
+      polygon_testnet: {
+        url: `${process.env.NODE_URL_MUMBAI}`,
+        accounts: [process.env.TESTNET_PK],
+        gas: 3000000 ,
+        gasPrice: 50000000000
+      },
+      polygon: {
+        url: `${process.env.NODE_URL_MATIC}`,
+        accounts: [process.env.PRIVATE_KEY],
+        gas: 2000000 ,
+        gasPrice: 250000000000
+      }
       // arbitrum_testnet: {
       //   url: `${process.env.NODE_URL_ARBITRUM_TESTNET}`,
       //   accounts: [process.env.TESTNET_PK],
@@ -110,7 +116,8 @@ module.exports = {
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
-    apiKey: process.env.ETHERSCAN
+    apiKey: process.env.POLYSCAN
+    //apiKey: process.env.ETHERSCAN
   },
 
   contractSizer: {

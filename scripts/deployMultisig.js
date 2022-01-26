@@ -21,9 +21,10 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     let privateKey = _pk;
     var provider = new ethers.providers.JsonRpcProvider(_nodeURL) 
     let wallet = new ethers.Wallet(privateKey, provider);
-    const multis = await ethers.getContractFactory("contracts/MultiSigWalletWithDailyLimit.sol:MultiSigWalletWithDailyLimit", wallet);
+    const multis = await ethers.getContractFactory("contracts/OriginalMultis/MultiSigWalletWithDailyLimit.sol:MultiSigWalletWithDailyLimit", wallet);
     var multisigSigner = await multis.connect(wallet);
-    const multisig = await multisigSigner.deploy();
+    //address[] _owners, uint _required, uint _dailyLimit
+    const multisig = await multisigSigner.deploy(["0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0);
     console.log("multisig deployed to:", multisig.address);
     await multisig.deployed();
 
@@ -62,13 +63,13 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     // Wait for few confirmed transactions.
     // Otherwise the etherscan api doesn't find the deployed contract.
     console.log('waiting for tx confirmation...');
-    await multisig.deployTransaction.wait(3)
+    await multisig.deployTransaction.wait(10)
 
     console.log('submitting contract for verification...');
 
     await run("verify:verify", {
-      address: multisig.address  //,
-      //constructorArguments: []
+      address: multisig.address ,
+      constructorArguments: [["0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0]
     },
     )
 
@@ -76,7 +77,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
 
   };
 
-  deployMultiSig("rinkeby", process.env.TESTNET_PK, process.env.NODE_URL_RINKEBY)
+  deployMultiSig("rinkeby", process.env.PRIVATE_KEY, process.env.NODE_URL_RINKEBY)
     .then(() => process.exit(0))
     .catch(error => {
 	  console.error(error);
