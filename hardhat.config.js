@@ -96,16 +96,16 @@ module.exports = {
       // }
       polygon_testnet: {
         url: `${process.env.NODE_URL_MUMBAI}`,
-        accounts: [process.env.TESTNET_PK],
+        seeds: [process.env.TESTNET_PK],
         gas: 3000000 ,
         gasPrice: 50000000000
-      },
-      polygon: {
-        url: `${process.env.NODE_URL_MATIC}`,
-        accounts: [process.env.PRIVATE_KEY],
-        gas: 2000000 ,
-        gasPrice: 250000000000
-      }
+      }//,
+      // polygon: {
+      //   url: `${process.env.NODE_URL_MATIC}`,
+      //   accounts: [process.env.PRIVATE_KEY],
+      //   gas: 2000000 ,
+      //   gasPrice: 250000000000
+      // }
       // arbitrum_testnet: {
       //   url: `${process.env.NODE_URL_ARBITRUM_TESTNET}`,
       //   accounts: [process.env.TESTNET_PK],
