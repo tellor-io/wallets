@@ -56,12 +56,6 @@ contract GnosisSafe is
     mapping(address => mapping(bytes32 => uint256)) public approvedHashes;
 
     // This constructor ensures that this contract can only be used as a master copy for Proxy contracts
-     constructor() {
-    //     // By setting the threshold it is not possible to call setup anymore,
-    //     // so we create a Safe with 0 owners and threshold 1.
-    //     // This is an unusable Safe, perfect for the singleton
-    //     threshold = 1;
-     }
 
     /// @dev Setup function sets initial storage of contract.
     /// @param _owners List of Safe owners.
@@ -72,16 +66,16 @@ contract GnosisSafe is
     /// @param paymentToken Token that should be used for the payment (0 is ETH)
     /// @param payment Value that should be paid
     /// @param paymentReceiver Address that should receive the payment (or 0 if tx.origin)
-    function setup(
-        address[] calldata _owners,
+    constructor(
+        address[] memory _owners,
         uint256 _threshold,
         address to,
-        bytes calldata data,
+        bytes memory data,
         address fallbackHandler,
         address paymentToken,
         uint256 payment,
         address payable paymentReceiver
-    ) external {
+    ){
         // setupOwners checks if the Threshold is already set, therefore preventing that this method is called twice
         setupOwners(_owners, _threshold);
         if (fallbackHandler != address(0)) internalSetFallbackHandler(fallbackHandler);

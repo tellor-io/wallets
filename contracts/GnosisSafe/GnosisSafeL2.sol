@@ -25,6 +25,28 @@ contract GnosisSafeL2 is GnosisSafe {
 
     event SafeModuleTransaction(address module, address to, uint256 value, bytes data, Enum.Operation operation);
 
+
+        /// @dev Setup function sets initial storage of contract.
+    /// @param _owners List of Safe owners.
+    /// @param _threshold Number of required confirmations for a Safe transaction.
+    /// @param to Contract address for optional delegate call.
+    /// @param data Data payload for optional delegate call.
+    /// @param fallbackHandler Handler for fallback calls to this contract
+    /// @param paymentToken Token that should be used for the payment (0 is ETH)
+    /// @param payment Value that should be paid
+    /// @param paymentReceiver Address that should receive the payment (or 0 if tx.origin)
+    constructor(
+        address[] memory _owners,
+        uint256 _threshold,
+        address to,
+        bytes memory data,
+        address fallbackHandler,
+        address paymentToken,
+        uint256 payment,
+        address payable paymentReceiver
+    ) GnosisSafe(_owners,_threshold,to,data,fallbackHandler,paymentToken,payment,paymentReceiver){
+    }
+
     /// @dev Allows to execute a Safe transaction confirmed by required number of owners and then pays the account that submitted the transaction.
     ///      Note: The fees are always transferred, even if the user transaction fails.
     /// @param to Destination address of Safe transaction.
