@@ -24,15 +24,19 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     const multis = await ethers.getContractFactory("contracts/OriginalMultis/MultiSigWalletWithDailyLimit.sol:MultiSigWalletWithDailyLimit", wallet);
     var multisigSigner = await multis.connect(wallet);
     
-    
-    //address[] _owners, uint _required, uint _dailyLimit
-    // const multisig = await multisigSigner.deploy(["0x8Bcc14e4068B4F372e1E6D1cf637797bF23Dab71","0x407e6e4E6698EA63D491f12333E7EF86a644fcE7","0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0);
-    // console.log("multisig deployed to:", multisig.address);
-    // await multisig.deployed();
 
-    //deploy fallbackmanager?
+    // address[] memory _owners,
+    // uint256 _threshold,
+    // address to,
+    // bytes memory data,
+    // address fallbackHandler,
+    // address paymentToken,
+    // uint256 payment,
+    // address payable paymentReceiver
 
-
+    const multisig = await multisigSigner.deploy(["0x8Bcc14e4068B4F372e1E6D1cf637797bF23Dab71","0x407e6e4E6698EA63D491f12333E7EF86a644fcE7","0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0x0,0x0,0x0,0,0,0 );
+     console.log("multisig deployed to:", multisig.address);
+     await multisig.deployed();
 
     if (net == "mainnet"){
         console.log("multisig contract deployed to:", "https://etherscan.io/address/" + multisig.address);
