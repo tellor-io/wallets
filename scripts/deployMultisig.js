@@ -34,6 +34,12 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     } else if (net == "rinkeby") {
         console.log("multisig contract deployed to:", "https://rinkeby.etherscan.io/address/" + multisig.address);
         console.log("    transaction hash:", "https://rinkeby.etherscan.io/tx/" + multisig.deployTransaction.hash);
+    } else if (net == "harmony_testnet") {
+        console.log("multisig contract deployed to:", "https://explorer.pops.one/address/" + multisig.address);
+        console.log("    transaction hash:", "https://explorer.pops.one/tx/" + multisig.deployTransaction.hash);
+    } else if (net == "harmony_mainnet") {
+        console.log("multisig contract deployed to:", "https://explorer.harmony.one/address/" + multisig.address);
+        console.log("    transaction hash:", "https://explorer.harmony.one/tx/" + multisig.deployTransaction.hash);
     } else if (net == "bsc_testnet") {
         console.log("multisig contract deployed to:", "https://testnet.bscscan.com/address/" + multisig.address);
         console.log("    transaction hash:", "https://testnet.bscscan.com/tx/" + multisig.deployTransaction.hash);
@@ -77,7 +83,13 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
 
   };
 
-  deployMultiSig("polygon_testnet", process.env.TESTNET_PK, process.env.NODE_URL_MUMBAI)
+//   deployMultiSig("harmony_testnet", process.env.TESTNET_PK, process.env.NODE_URL_HARMONY_TESTNET)
+//     .then(() => process.exit(0))
+//     .catch(error => {
+// 	  console.error(error);
+// 	  process.exit(1);
+//   });
+  deployMultiSig("harmony_mainnet", process.env.MAINNET_PK, process.env.NODE_URL_HARMONY_MAINNET)
     .then(() => process.exit(0))
     .catch(error => {
 	  console.error(error);
