@@ -21,7 +21,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     let privateKey = _pk;
     var provider = new ethers.providers.JsonRpcProvider(_nodeURL) 
     let wallet = new ethers.Wallet(privateKey, provider);
-    const multis = await ethers.getContractFactory("contracts/OriginalMultis/MultiSigWalletWithDailyLimit.sol:MultiSigWalletWithDailyLimit", wallet);
+    const multis = await ethers.getContractFactory("contracts/GnosisSafe/GnosisSafeL2.sol:GnosisSafeL2", wallet);
     var multisigSigner = await multis.connect(wallet);
     
 
@@ -34,7 +34,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     // uint256 payment,
     // address payable paymentReceiver
 
-    const multisig = await multisigSigner.deploy(["0x8Bcc14e4068B4F372e1E6D1cf637797bF23Dab71","0x407e6e4E6698EA63D491f12333E7EF86a644fcE7","0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0x0,0x0,0x0,0,0,0 );
+    const multisig = await multisigSigner.deploy(["0x8Bcc14e4068B4F372e1E6D1cf637797bF23Dab71","0x407e6e4E6698EA63D491f12333E7EF86a644fcE7","0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,"0x0000000000000000000000000000000000000000",0x0,"0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000",0,"0x0000000000000000000000000000000000000000");
      console.log("multisig deployed to:", multisig.address);
      await multisig.deployed();
 
@@ -44,6 +44,12 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     } else if (net == "rinkeby") {
         console.log("multisig contract deployed to:", "https://rinkeby.etherscan.io/address/" + multisig.address);
         console.log("    transaction hash:", "https://rinkeby.etherscan.io/tx/" + multisig.deployTransaction.hash);
+    } else if (net == "harmony_testnet") {
+        console.log("multisig contract deployed to:", "https://explorer.pops.one/address/" + multisig.address);
+        console.log("    transaction hash:", "https://explorer.pops.one/tx/" + multisig.deployTransaction.hash);
+    } else if (net == "harmony_mainnet") {
+        console.log("multisig contract deployed to:", "https://explorer.harmony.one/address/" + multisig.address);
+        console.log("    transaction hash:", "https://explorer.harmony.one/tx/" + multisig.deployTransaction.hash);
     } else if (net == "bsc_testnet") {
         console.log("multisig contract deployed to:", "https://testnet.bscscan.com/address/" + multisig.address);
         console.log("    transaction hash:", "https://testnet.bscscan.com/tx/" + multisig.deployTransaction.hash);
@@ -79,7 +85,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
 
     await run("verify:verify", {
       address: multisig.address ,
-      constructorArguments: [["0x8Bcc14e4068B4F372e1E6D1cf637797bF23Dab71","0x407e6e4E6698EA63D491f12333E7EF86a644fcE7","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0]
+      constructorArguments: [["0x8Bcc14e4068B4F372e1E6D1cf637797bF23Dab71","0x407e6e4E6698EA63D491f12333E7EF86a644fcE7","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,"0x0000000000000000000000000000000000000000",0x0,"0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000",0,"0x0000000000000000000000000000000000000000"]
     },
     )
 
@@ -87,9 +93,15 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
 
   };
 
-  deployMultiSig("polygon_testnet", process.env.TESTNET_PK, process.env.NODE_URL_MUMBAI)
-    .then(() => process.exit(0))
-    .catch(error => {
-	  console.error(error);
-	  process.exit(1);
-  });
+//   deployMultiSig("harmony_testnet", process.env.TESTNET_PK, process.env.NODE_URL_HARMONY_TESTNET)
+//     .then(() => process.exit(0))
+//     .catch(error => {
+// 	  console.error(error);
+// 	  process.exit(1);
+//   });
+  deployMultiSig("harmony_mainnet", process.env.MAINNET_PK, process.env.NODE_URL_HARMONY_MAINNET)
+  .then(() => process.exit(0))
+  .catch(error => {
+    console.error(error);
+    process.exit(1);
+});
