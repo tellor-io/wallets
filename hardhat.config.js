@@ -64,12 +64,12 @@ module.exports = {
       gas: 10000000,
       gasPrice: 40000000000
  },
-      // mainnet: {
-      //   url: `${process.env.NODE_URL_MAINNET}`,
-      //   accounts: [process.env.PRIVATE_KEY],
-      //   gas: 10000000 ,
-      //   gasPrice: 50000000000
-      // }
+      mainnet: {
+        url: `${process.env.NODE_URL_MAINNET}`,
+        seeds: [process.env.PRIVATE_KEY],
+        gas: 10000000 ,
+        gasPrice: 50000000000
+      }
       // ropsten: {
       //   url: `${process.env.NODE_URL_ROPSTEN}`,
       //   accounts: [process.env.TESTNET_PK],
@@ -94,7 +94,7 @@ module.exports = {
       //   gas: 10000000 ,
       //   gasPrice: 50000000000
       // }
-      polygon_testnet: {
+      ,polygon_testnet: {
         url: `${process.env.NODE_URL_MUMBAI}`,
         seeds: [process.env.TESTNET_PK],
         gas: 3000000 ,
@@ -118,9 +118,9 @@ module.exports = {
       //   gas: 10000000 ,
       //   gasPrice: 50000000000
       // }
-      harmony_mainnet: {
+      , harmony_mainnet: {
         url: `${process.env.NODE_URL_HARMONY_MAINNET}`,
-        accounts: [process.env.MAINNET_PK],
+        seeds: [process.env.MAINNET_PK],
         gas: 10000000 ,
         gasPrice: 50000000000
     }
