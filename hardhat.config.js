@@ -1,9 +1,12 @@
+/** @type import('hardhat/config').HardhatUserConfig */
+
+require("@nomiclabs/hardhat-waffle");
+require("hardhat-gas-reporter");
+require("solidity-coverage");
 require("hardhat-gas-reporter");
 require('hardhat-contract-sizer');
-require("solidity-coverage");
 require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
-require("@nomiclabs/hardhat-waffle");
 require("dotenv").config();
 
 module.exports = {
@@ -19,7 +22,7 @@ module.exports = {
         }
       },
       {
-        version: "0.4.15",
+        version: "0.5.3",
         settings: {
           optimizer: {
             enabled: true,
@@ -28,7 +31,7 @@ module.exports = {
         }
       },
       {
-        version: "0.5.3",
+        version: "0.4.15",
         settings: {
           optimizer: {
             enabled: true,
@@ -40,97 +43,191 @@ module.exports = {
   },
   networks: {
     hardhat: {
-      hardfork: process.env.CODE_COVERAGE ? "berlin" : "london",
-      initialBaseFeePerGas: 0,
-      accounts: {
-        mnemonic:
-          "nick lucian brenda kevin sam fiscal patch fly damp ocean produce wish",
-        count: 40,
-      },
+      // hardfork: process.env.CODE_COVERAGE ? "berlin" : "london",
+      // initialBaseFeePerGas: 0,
+      // accounts: {
+      //   mnemonic:
+      //     "nick lucian brenda kevin sam fiscal patch fly damp ocean produce wish",
+      //   count: 40,
+      // },
       forking: {
-        url: "https://eth-mainnet.alchemyapi.io/v2/7dW8KCqWwKa1vdaitq-SxmKfxWZ4yPG6"
+        url : "https://eth-mainnet.alchemyapi.io/v2/hP3lNPFpxPSwfwJtfaZi4ezZlPgimAnN", // mainnet
+        // url: "https://eth-goerli.alchemyapi.io/v2/I-BlqR7R6s5-Skel3lnCwJzamDbmXHLF", // Goerli
+        // blockNumber:  // rinkeby
       },
       allowUnlimitedContractSize: true
     },
-    rinkeby: {
-         url: `${process.env.NODE_URL_RINKEBY}`,
-         seeds: [process.env.TESTNET_PK],
-         gas: 10000000,
-         gasPrice: 40000000000
+    goerli: {
+      url: `${process.env.NODE_URL_GOERLI}`,
+      accounts: [process.env.TESTNET_PK],
+      gas: 10000000 ,
+      gasPrice: 50000000000
     },
-    ropsten: {
-      url: `${process.env.NODE_URL_ROPSTEN}`,
-      seeds: [process.env.TESTNET_PK],
-      gas: 10000000,
-      gasPrice: 40000000000
- },
-      mainnet: {
-        url: `${process.env.NODE_URL_MAINNET}`,
-        seeds: [process.env.PRIVATE_KEY],
-        gas: 10000000 ,
-        gasPrice: 50000000000
-      }
-      // ropsten: {
-      //   url: `${process.env.NODE_URL_ROPSTEN}`,
-      //   accounts: [process.env.TESTNET_PK],
-      //   gas: 10000000 ,
-      //   gasPrice: 50000000000
-      // }
-      // kovan: {
-      //   url: `${process.env.NODE_URL_KOVAN}`,
-      //   accounts: [process.env.TESTNET_PK],
-      //   gas: 10000000 ,
-      //   gasPrice: 50000000000
-      // }
-      // goerli: {
-      //   url: `${process.env.NODE_URL_GOERLI}`,
-      //   accounts: [process.env.TESTNET_PK],
-      //   gas: 10000000 ,
-      //   gasPrice: 50000000000
-      // }
-      // bsc_testnet: {
-      //   url: `${process.env.NODE_URL_BSC_TESTNET}`,
-      //   accounts: [process.env.TESTNET_PK],
-      //   gas: 10000000 ,
-      //   gasPrice: 50000000000
-      // }
-      ,polygon_testnet: {
-        url: `${process.env.NODE_URL_MUMBAI}`,
-        seeds: [process.env.TESTNET_PK],
-        gas: 3000000 ,
-        gasPrice: 50000000000
-      }//,
-      // polygon: {
-      //   url: `${process.env.NODE_URL_MATIC}`,
+      // mainnet: {
+      //   url: `${process.env.NODE_URL_MAINNET}`,
       //   accounts: [process.env.PRIVATE_KEY],
-      //   gas: 2000000 ,
-      //   gasPrice: 250000000000
-      // }
-      // arbitrum_testnet: {
-      //   url: `${process.env.NODE_URL_ARBITRUM_TESTNET}`,
-      //   accounts: [process.env.TESTNET_PK],
       //   gas: 10000000 ,
       //   gasPrice: 50000000000
-      // }
-      // harmony_testnet: {
-      //   url: `${process.env.NODE_URL_HARMONY_TESTNET}`,
-      //   accounts: [process.env.TESTNET_PK],
-      //   gas: 10000000 ,
-      //   gasPrice: 50000000000
-      // }
-      , harmony_mainnet: {
-        url: `${process.env.NODE_URL_HARMONY_MAINNET}`,
-        seeds: [process.env.MAINNET_PK],
-        gas: 10000000 ,
+      // },
+   mumbai: {
+        url: `${process.env.NODE_URL_MUMBAI}`,
+        accounts: [process.env.TESTNET_PK],
+        gas: 5000000 ,
         gasPrice: 50000000000
-    }
+      },
+      tfilecoin: {
+        url: `${process.env.NODE_URL_FILECOIN_TESTNET}`,
+        accounts: [process.env.TESTNET_PK],
+        gas: 10000000 ,
+        gasPrice: 20000000000
+      },
+      filecoin: {
+        url: `${process.env.NODE_URL_FILECOIN}`,
+        accounts: [process.env.TESTNET_PK],
+        gas: 10000000 ,
+        gasPrice: 20000000000
+      },
+
+
+    // polygon: {
+    //   url: `${process.env.NODE_URL_MATIC}`,
+    //   accounts: [process.env.PRIVATE_KEY],
+    //   gas: 5000000 ,
+    //   gasPrice: 250000000000
+ 
+      //maxPriorityFeePerGas: ,
+      //maxFeePerGas: 
+    // },
+    chiado: {
+      url: `${process.env.NODE_URL_CHIADO}`,
+      accounts: [process.env.TESTNET_PK],
+      gas: 5000000 ,
+      gasPrice: 50000000000
+    } ,
+    gnosis: {
+      url: `${process.env.NODE_URL_GNOSIS}`,
+      accounts: [process.env.TESTNET_PK],
+      gas: 5000000 ,
+      gasPrice: 5000000000
+    } ,
+    arbitrum_testnet: {
+      url: `${process.env.NODE_URL_ARBITRUM_TESTNET}`,
+      accounts: [process.env.TESTNET_PK],
+      gas: 10000000 ,
+      gasPrice: 50000000000
+    },
+    sepolia: {
+      url: `${process.env.NODE_URL_SEPOLIA}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 9000000 ,
+      gasPrice: 5000000000
+    },
+    manta_testnet: {
+      url: `${process.env.NODE_URL_MANTA_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000000
+    },
+    mantle_testnet: {
+      url: `${process.env.NODE_URL_MANTLE_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000000
+    },
+    mantle: {
+      url: `${process.env.NODE_URL_MANTLE}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000000
+    },
+    zkevm_testnet: {
+      url: `${process.env.NODE_URL_ZKEVM_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000000
+    },
+    linea_testnet: {
+      url: `${process.env.NODE_URL_LINEA_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000000
+    },
+    linea: {
+      url: `${process.env.NODE_URL_LINEA}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000000
+    },  
+    europa_testnet: {
+      url: `${process.env.NODE_URL_SKALE_EUROPA_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 10000000000
+    }, 
+    europa: {
+      url: `${process.env.NODE_URL_SKALE_EUROPA}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 10000000000
+    }    
+
   },
+  // etherscan: {
+  //   // Your API key for Etherscan
+  //   // Obtain one at https://etherscan.io/
+  //   //apiKey: process.env.ETHERSCAN
+  //   //apiKey: process.env.POLYSCAN
+  //   apiKey: process.env.ETHERSCAN
+  // },
+
   etherscan: {
-    // Your API key for Etherscan
-    // Obtain one at https://etherscan.io/
-    apiKey: process.env.POLYSCAN
-    //apiKey: process.env.ETHERSCAN
+    
+    apiKey: {
+       // Your API key for Etherscan
+   // Obtain one at https://etherscan.io/
+   //sepolia: process.env.ETHERSCAN
+   //apiKey: process.env.POLYSCAN
+   //apiKey: process.env.BSC_TOKEN
+   //apiKey: process.env.OPTIMISMSCAN
+   mantleTest: process.env.ETHERSCAN,
+   mantle: process.env.ETHERSCAN,
+   linea: process.env.ETHERSCAN
+    },
+    customChains: [
+      {
+        network: "sepolia",
+        chainId: 11155111,
+        urls: {
+          apiURL: "https://api-sepolia.etherscan.io/api",
+          browserURL: "https://sepolia.etherscan.io"
+        }
+      },
+      {
+        network: "mantleTest",
+        chainId: 5001,
+        urls: {
+        apiURL: "https://explorer.testnet.mantle.xyz/api",
+        browserURL: "https://explorer.testnet.mantle.xyz"
+        }
+      },
+      {
+        network: "mantle",
+        chainId: 5000,
+        urls: {
+        apiURL: "https://explorer.mantle.xyz/api",
+        browserURL: "https://explorer.mantle.xyz"
+        },
+ 
+    
+
+      },
+    
+
+
+    ]
   },
+
+
 
   contractSizer: {
     alphaSort: true,
@@ -138,4 +235,9 @@ module.exports = {
     disambiguatePaths: false,
   },
 
-}
+  mocha: {
+    grep: "@skip-on-coverage", // Find everything with this tag
+    invert: true               // Run the grep's inverse set.
+  }
+
+};
