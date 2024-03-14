@@ -8,7 +8,7 @@ require("dotenv").config();
 
 
 
-//npx hardhat run scripts/deployMultisig.js --network rinkeby
+//npx hardhat run scripts/deployMultisig.js --network europa_testnet
 
 async function deployMultiSig(_network, _pk, _nodeURL) {
 
@@ -24,7 +24,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     const multis = await ethers.getContractFactory("contracts/OriginalMultis/MultiSigWalletWithDailyLimit.sol:MultiSigWalletWithDailyLimit", wallet);
     var multisigSigner = await multis.connect(wallet);
     //address[] _owners, uint _required, uint _dailyLimit
-    const multisig = await multisigSigner.deploy(["0x8Bcc14e4068B4F372e1E6D1cf637797bF23Dab71","0x407e6e4E6698EA63D491f12333E7EF86a644fcE7","0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0);
+    const multisig = await multisigSigner.deploy(["0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0);
     console.log("multisig deployed to:", multisig.address);
     await multisig.deployed();
 
@@ -61,7 +61,55 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     } else if (net == "xdai"){ //https://blockscout.com/poa/xdai/address/
       console.log("multisig contract deployed to:","https://blockscout.com/xdai/mainnet/address/"+ multisig.address)
       console.log("    transaction hash:", "https://blockscout.com/xdai/mainnet/tx/" + multisig.deployTransaction.hash);
-    } else {
+    } else if (net == "chiado") {
+      console.log("multisig contract deployed to:", "https://blockscout.chiadochain.net/address/" + multisig.address);
+      console.log("    multisig transaction hash:", "https://blockscout.chiadochain.net/tx/" + multisig.deployTransaction.hash);
+   
+    } else if (net == "optimism_testnet") {
+        console.log("multisig contract deployed to:", "https://goerli-optimism.etherscan.io/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://goerli-optimism.etherscan.io/tx/" + multisig.deployTransaction.hash);
+    } else if (net == "tfilecoin") {
+        console.log("multisig contract deployed to:", "https://calibration.filfox.info/en/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://calibration.filfox.info/en/tx/" + multisig.deployTransaction.hash);
+    } else if (net == "filecoin") {
+        console.log("multisig contract deployed to:", "https://filfox.info/en/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://filfox.info/en/tx/" + multisig.deployTransaction.hash);
+    }  else if (net == "sepolia") {
+        console.log("multisig contract deployed to:", "https://sepolia.etherscan.io/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://sepolia.etherscan.io/tx/" + multisig.deployTransaction.hash);
+    }  else if (net == "manta_testnet") {
+        console.log("multisig contract deployed to:", "https://manta-testnet.calderaexplorer.xyz/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://manta-testnet.calderaexplorer.xyz/tx/" + multisig.deployTransaction.hash);  
+    }  else if (net == "manta") {
+        console.log("multisig contract deployed to:", "https://pacific-explorer.manta.network//address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://pacific-explorer.manta.network//tx/" + multisig.deployTransaction.hash);  
+  
+    }  else if (net == "base_testnet") {
+        console.log("multisig contract deployed to:", "https://basescan.org/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://basescan.org/tx/" + multisig.deployTransaction.hash);  
+   
+    }  else if (net == "mantle_testnet") {
+        console.log("multisig contract deployed to:", "https://explorer.testnet.mantle.xyz/address" + multisig.address);
+        console.log("    multisig transaction hash:", "https://explorer.testnet.mantle.xyz/tx/" + multisig.deployTransaction.hash);  
+    }  else if (net == "mantle") {
+        console.log("multisig contract deployed to:", "https://explorer.mantle.xyz/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://explorer.mantle.xyz/tx/" + multisig.deployTransaction.hash);  
+    }  else if (net == "zkevm_testnet") {
+        console.log("multisig contract deployed to:", "https://cardona-zkevm.polygonscan.com/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://cardona-zkevm.polygonscan.com/tx/" + multisig.deployTransaction.hash);  
+    }  else if (net == "linea") {
+        console.log("multisig contract deployed to:", "https://lineascan.build/address/" + multisig.address);
+   }  else if (net == "linea_testnet") {
+        console.log("multisig contract deployed to:", "https://goerli.lineascan.build/address/" + multisig.address);
+    }  else if (net == "europa"){ 
+        console.log("multisig deployed to:","https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/"+ multisig.address)
+         }  else if (net == "europa_testnet"){ 
+        console.log("multisig  deployed to:","https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/address/"+ multisig.address)
+    }  else if (net == "holesky"){ 
+        console.log("multisig  deployed to:","https://holesky.etherscan.io/address/"+ multisig.address)
+       
+
+    }else {
         console.log("Please add network explorer details")
     }
 
@@ -75,7 +123,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
 
     await run("verify:verify", {
       address: multisig.address ,
-      constructorArguments: [["0x8Bcc14e4068B4F372e1E6D1cf637797bF23Dab71","0x407e6e4E6698EA63D491f12333E7EF86a644fcE7","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0]
+      constructorArguments: [["0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0]
     },
     )
 
@@ -83,13 +131,8 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
 
   };
 
-//   deployMultiSig("harmony_testnet", process.env.TESTNET_PK, process.env.NODE_URL_HARMONY_TESTNET)
-//     .then(() => process.exit(0))
-//     .catch(error => {
-// 	  console.error(error);
-// 	  process.exit(1);
-//   });
-  deployMultiSig("harmony_mainnet", process.env.MAINNET_PK, process.env.NODE_URL_HARMONY_MAINNET)
+
+  deployMultiSig("europa_testnet", process.env.TESTNET_PK, process.env.NODE_URL_SKALE_EUROPA_TESTNET)
     .then(() => process.exit(0))
     .catch(error => {
 	  console.error(error);
