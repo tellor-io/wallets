@@ -8,7 +8,7 @@ require("dotenv").config();
 
 
 
-//npx hardhat run scripts/deployMultisig.js --network europa_testnet
+//npx hardhat run scripts/deployMultisig.js --network kyoto_testnet
 
 async function deployMultiSig(_network, _pk, _nodeURL) {
 
@@ -107,7 +107,9 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
         console.log("multisig  deployed to:","https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/address/"+ multisig.address)
     }  else if (net == "holesky"){ 
         console.log("multisig  deployed to:","https://holesky.etherscan.io/address/"+ multisig.address)
-       
+    }  else if (net == "kyoto_testnet"){ 
+        console.log("multisig  deployed to:","https://testnet.kyotoscan.io/address/"+ multisig.address)
+        
 
     }else {
         console.log("Please add network explorer details")
@@ -132,7 +134,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
   };
 
 
-  deployMultiSig("europa_testnet", process.env.TESTNET_PK, process.env.NODE_URL_SKALE_EUROPA_TESTNET)
+  deployMultiSig("kyoto_testnet", process.env.TESTNET_PK, process.env.NODE_URL_KYOTO_TESTNET)
     .then(() => process.exit(0))
     .catch(error => {
 	  console.error(error);

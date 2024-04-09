@@ -169,7 +169,13 @@ module.exports = {
       seeds: [process.env.TESTNET_PK],
       gas: 8000000 ,
       gasPrice: 10000000000
-    }    
+    },
+    kyoto_testnet: {
+      url: `${process.env.NODE_URL_KYOTO_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 10000000000
+    }        
 
   },
   // etherscan: {
