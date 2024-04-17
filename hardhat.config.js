@@ -18,7 +18,8 @@ module.exports = {
           optimizer: {
             enabled: true,
             runs: 300
-          }
+          },
+          
         }
       },
       {
@@ -37,6 +38,7 @@ module.exports = {
             enabled: true,
             runs: 300
           }
+          //,evmVersion: "berlin" //only use for kyoto
         }
       }
     ]
@@ -175,7 +177,13 @@ module.exports = {
       seeds: [process.env.TESTNET_PK],
       gas: 8000000 ,
       gasPrice: 10000000000
-    }        
+    },
+    polygon_amoy: {
+      url: `${process.env.NODE_URL_POLYGON_AMOY}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 10000000000
+    }            
 
   },
   // etherscan: {
