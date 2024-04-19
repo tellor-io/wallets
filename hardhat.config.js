@@ -59,24 +59,14 @@ module.exports = {
       },
       allowUnlimitedContractSize: true
     },
-    goerli: {
-      url: `${process.env.NODE_URL_GOERLI}`,
-      accounts: [process.env.TESTNET_PK],
-      gas: 10000000 ,
-      gasPrice: 50000000000
-    },
+
       // mainnet: {
       //   url: `${process.env.NODE_URL_MAINNET}`,
       //   accounts: [process.env.PRIVATE_KEY],
       //   gas: 10000000 ,
       //   gasPrice: 50000000000
       // },
-   mumbai: {
-        url: `${process.env.NODE_URL_MUMBAI}`,
-        accounts: [process.env.TESTNET_PK],
-        gas: 5000000 ,
-        gasPrice: 50000000000
-      },
+
       tfilecoin: {
         url: `${process.env.NODE_URL_FILECOIN_TESTNET}`,
         accounts: [process.env.TESTNET_PK],
@@ -183,6 +173,12 @@ module.exports = {
       seeds: [process.env.TESTNET_PK],
       gas: 8000000 ,
       gasPrice: 10000000000
+    },
+    optimism_sepolia: {
+      url: `${process.env.NODE_URL_OPTIMISM_SEPOLIA}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000
     }            
 
   },
