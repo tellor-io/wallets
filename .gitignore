@@ -5,3 +5,4 @@ artifacts/
 slither
 coverage/
 coverage.json
+package-lock.json
