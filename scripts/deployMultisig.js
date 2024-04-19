@@ -8,12 +8,12 @@ require("dotenv").config();
 
 
 
-//npx hardhat run scripts/deployMultisig.js --network kyoto_testnet
+//npx hardhat run scripts/deployMultisig.js --network optimism_sepolia
 
-async function deployMultiSig(_network, _pk, _nodeURL) {
+async function deployMultiSig(_pk, _nodeURL) {
 
     console.log("deploy MultiSig")
-    var net = _network
+    var net = hre.network.name
 
     await run("compile")
 
@@ -63,8 +63,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
       console.log("    transaction hash:", "https://blockscout.com/xdai/mainnet/tx/" + multisig.deployTransaction.hash);
     } else if (net == "chiado") {
       console.log("multisig contract deployed to:", "https://blockscout.chiadochain.net/address/" + multisig.address);
-      console.log("    multisig transaction hash:", "https://blockscout.chiadochain.net/tx/" + multisig.deployTransaction.hash);
-   
+      console.log("    multisig transaction hash:", "https://blockscout.chiadochain.net/tx/" + multisig.deployTransaction.hash);  
     } else if (net == "optimism_testnet") {
         console.log("multisig contract deployed to:", "https://goerli-optimism.etherscan.io/address/" + multisig.address);
         console.log("    multisig transaction hash:", "https://goerli-optimism.etherscan.io/tx/" + multisig.deployTransaction.hash);
@@ -110,6 +109,11 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
     }  else if (net == "kyoto_testnet"){ 
         console.log("multisig  deployed to:","https://testnet.kyotoscan.io/address/"+ multisig.address)
         
+    }  else if (net == "polygon_amoy"){ 
+        console.log("multisig  deployed to:","https://amoy.polygonscan.com/address/"+ multisig.address)
+    }  else if (net == "optimism_sepolia"){ 
+        console.log("multisig  deployed to:","https://sepolia-optimism.etherscan.io/address/"+ multisig.address)
+    
 
     }else {
         console.log("Please add network explorer details")
@@ -134,7 +138,7 @@ async function deployMultiSig(_network, _pk, _nodeURL) {
   };
 
 
-  deployMultiSig("kyoto_testnet", process.env.TESTNET_PK, process.env.NODE_URL_KYOTO_TESTNET)
+  deployMultiSig(process.env.TESTNET_PK, process.env.NODE_URL_OPTIMISM_SEPOLIA)
     .then(() => process.exit(0))
     .catch(error => {
 	  console.error(error);
