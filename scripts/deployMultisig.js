@@ -8,7 +8,7 @@ require("dotenv").config();
 
 
 
-//npx hardhat run scripts/deployMultisig.js --network optimism_sepolia
+//npx hardhat run scripts/deployMultisig.js --network mantle_sepolia
 
 async function deployMultiSig(_pk, _nodeURL) {
 
@@ -113,6 +113,10 @@ async function deployMultiSig(_pk, _nodeURL) {
         console.log("multisig  deployed to:","https://amoy.polygonscan.com/address/"+ multisig.address)
     }  else if (net == "optimism_sepolia"){ 
         console.log("multisig  deployed to:","https://sepolia-optimism.etherscan.io/address/"+ multisig.address)
+    }  else if (net == "arbitrum_sepolia"){ 
+        console.log("multisig  deployed to:","https://sepolia.arbiscan.io/address/"+ multisig.address)
+    }  else if (net == "mantle_sepolia"){ 
+        console.log("multisig  deployed to:","https://explorer.mantle.xyz/address/"+ multisig.address)
     
 
     }else {
@@ -138,7 +142,7 @@ async function deployMultiSig(_pk, _nodeURL) {
   };
 
 
-  deployMultiSig(process.env.TESTNET_PK, process.env.NODE_URL_OPTIMISM_SEPOLIA)
+  deployMultiSig(process.env.TESTNET_PK, process.env.NODE_URL_MANTLE_SEPOLIA)
     .then(() => process.exit(0))
     .catch(error => {
 	  console.error(error);
