@@ -8,7 +8,7 @@ require("dotenv").config();
 
 
 
-//npx hardhat run scripts/deployMultisig.js --network mantle_sepolia
+//npx hardhat run scripts/deployMultisig.js --network bob_sepolia
 
 async function deployMultiSig(_pk, _nodeURL) {
 
@@ -24,7 +24,7 @@ async function deployMultiSig(_pk, _nodeURL) {
     const multis = await ethers.getContractFactory("contracts/OriginalMultis/MultiSigWalletWithDailyLimit.sol:MultiSigWalletWithDailyLimit", wallet);
     var multisigSigner = await multis.connect(wallet);
     //address[] _owners, uint _required, uint _dailyLimit
-    const multisig = await multisigSigner.deploy(["0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0);
+    const multisig = await multisigSigner.deploy(["0x3564e17d5f6b7c9a3c6bd6248bf7b3eeb4927e50","0x0d7effefdb084dfeb1621348c8c70cc4e871eba4","0x2a4ea8464bd2dac1ad4f841dcc7a8efb4d84a27d"],2,0 );
     console.log("multisig deployed to:", multisig.address);
     await multisig.deployed();
 
@@ -77,11 +77,11 @@ async function deployMultiSig(_pk, _nodeURL) {
         console.log("multisig contract deployed to:", "https://sepolia.etherscan.io/address/" + multisig.address);
         console.log("    multisig transaction hash:", "https://sepolia.etherscan.io/tx/" + multisig.deployTransaction.hash);
     }  else if (net == "manta_testnet") {
-        console.log("multisig contract deployed to:", "https://manta-testnet.calderaexplorer.xyz/address/" + multisig.address);
-        console.log("    multisig transaction hash:", "https://manta-testnet.calderaexplorer.xyz/tx/" + multisig.deployTransaction.hash);  
+        console.log("multisig contract deployed to:", "https://pacific-explorer.sepolia-testnet.manta.network/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://pacific-explorer.sepolia-testnet.manta.network/tx/" + multisig.deployTransaction.hash);  
     }  else if (net == "manta") {
-        console.log("multisig contract deployed to:", "https://pacific-explorer.manta.network//address/" + multisig.address);
-        console.log("    multisig transaction hash:", "https://pacific-explorer.manta.network//tx/" + multisig.deployTransaction.hash);  
+        console.log("multisig contract deployed to:", "https://pacific-explorer.sepolia-testnet.manta.network/address/" + multisig.address);
+        console.log("    multisig transaction hash:", "https://pacific-explorer.sepolia-testnet.manta.network/tx/" + multisig.deployTransaction.hash);  
   
     }  else if (net == "base_testnet") {
         console.log("multisig contract deployed to:", "https://basescan.org/address/" + multisig.address);
@@ -117,7 +117,24 @@ async function deployMultiSig(_pk, _nodeURL) {
         console.log("multisig  deployed to:","https://sepolia.arbiscan.io/address/"+ multisig.address)
     }  else if (net == "mantle_sepolia"){ 
         console.log("multisig  deployed to:","https://explorer.mantle.xyz/address/"+ multisig.address)
+    }  else if (net == "bob_sepolia"){ 
+        console.log("multisig  deployed to:","https://bob-sepolia.explorer.gobob.xyz/"+ multisig.address)
     
+    }  else if (net == "bob"){ 
+        console.log("multisig  deployed to:","https://explorer.gobob.xyz/"+ multisig.address)
+    }  else if (net == "mode_tesnet"){ 
+        console.log("multisig  deployed to:","https://sepolia.explorer.mode.network/address/"+ multisig.address)
+    }  else if (net == "mode"){ 
+        console.log("multisig  deployed to:","https://modescan.io/address/"+ multisig.address)
+    }  else if (net == "rari_testnet"){ 
+        console.log("multisig  deployed to:","https://explorer.rarichain.org/address/"+ multisig.address)
+    }  else if (net == "telos_testnet"){ 
+        console.log("multisig  deployed to:","https://testnet.teloscan.io/address/"+ multisig.address)
+    }  else if (net == "atleta_testnet"){ 
+        console.log("multisig  deployed to:","https://blockscout.atleta.network/address/"+ multisig.address)
+    }  else if (net == "taraxa_testnet"){ 
+        console.log("multisig  deployed to:","https://explorer.mainnet.taraxa.io/address/"+ multisig.address)
+               
 
     }else {
         console.log("Please add network explorer details")
@@ -142,7 +159,7 @@ async function deployMultiSig(_pk, _nodeURL) {
   };
 
 
-  deployMultiSig(process.env.TESTNET_PK, process.env.NODE_URL_MANTLE_SEPOLIA)
+  deployMultiSig(process.env.TESTNET_PK, process.env.NODE_URL_BOB_SEPOLIA)
     .then(() => process.exit(0))
     .catch(error => {
 	  console.error(error);

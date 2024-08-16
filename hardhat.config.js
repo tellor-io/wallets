@@ -115,10 +115,10 @@ module.exports = {
       gasPrice: 5000000000
     },
     manta_testnet: {
-      url: `${process.env.NODE_URL_MANTA_TESTNET}`,
+      url: `${process.env.NODE_URL_MANTA_SEPOLIA_TESTNET}`,
       seeds: [process.env.TESTNET_PK],
       gas: 8000000 ,
-      gasPrice: 1000000000
+      gasPrice: 8000000000
     },
     mantle_testnet: {
       url: `${process.env.NODE_URL_MANTLE_TESTNET}`,
@@ -198,7 +198,63 @@ module.exports = {
       seeds: [process.env.TESTNET_PK],
       gas: 8000000 ,
       gasPrice: 1000000
-    }      
+    }  ,
+    bob_sepolia: {
+      url: `${process.env.NODE_URL_BOB_SEPOLIA}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 20
+    } ,              
+
+    bob: {
+      url: `${process.env.NODE_URL_BOB}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000
+    },
+    mode_testnet: {
+      url: `${process.env.NODE_URL_MODE_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000
+    },
+    mode: {
+      url: `${process.env.NODE_URL_MODE_MAINNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1000000
+    },          
+    rari_testnet: {
+      url: `${process.env.NODE_URL_RARI_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 100000000
+    }   ,          
+    telos_testnet: {
+      url: `${process.env.NODE_URL_TELOS_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 6000000000
+    }  ,
+    atleta_testnet: {
+      url: `${process.env.NODE_URL_ATLETA_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 200000000
+    }     ,
+    telos: {
+      url: `${process.env.NODE_URL_TELOS}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 6000000000
+    }      ,
+    taraxa_testnet: {
+      url: `${process.env.NODE_URL_TARAXA_TESTNET}`,
+      seeds: [process.env.TESTNET_PK],
+      gas: 8000000 ,
+      gasPrice: 1
+    }         
+
 
   },
   // etherscan: {
@@ -246,6 +302,7 @@ module.exports = {
         apiURL: "https://explorer.mantle.xyz/api",
         browserURL: "https://explorer.mantle.xyz"
         },
+        
  
     
 
